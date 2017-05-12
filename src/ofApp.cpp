@@ -18,16 +18,16 @@ void ofApp::setup(){
     tex.loadData(img0.getPixels());
     tex.generateMipmap();
     tex.setTextureWrap(GL_REPEAT, GL_REPEAT);
-    shadertoy.setTexture(0, tex);
+    shadertoy.setTexture(1, tex);
     ///*
     ofTexture texM;
     texM.allocate(img.getWidth(), img.getHeight(), GL_RGBA, false); // fourth parameter is false to avoid generation of a GL_TEXTURE_2D_RECTANGLE texture - we don't want this.
     texM.loadData(img.getPixels());
     texM.generateMipmap();
     texM.setTextureWrap(GL_REPEAT, GL_REPEAT);
-    shadertoy.setTexture(1, texM);
+    shadertoy.setTexture(0, texM);
 
-    ofSetFrameRate(60);
+    //ofSetFrameRate(60);
     shadertoy.setAdvanceTime(true);
     shadertoy.setUseMouse(true);
 }
@@ -42,6 +42,11 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     shadertoy.draw(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+
+	ofSetColor(255, 0, 255);
+	stringstream reportStream;
+	reportStream << "fps: " << ofGetFrameRate() << endl;
+	ofDrawBitmapString(reportStream.str(), 20, 20);
 }
 
 //--------------------------------------------------------------
